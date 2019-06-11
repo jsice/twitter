@@ -1,11 +1,13 @@
 class TweetsController < ApplicationController
 
+  skip_before_action :authenticate_user!, only: [:index, :show]
+
   def index
     @tweets = Tweet.all
   end
 
   def create
-    @tweet = Tweet.create(tweet_params)
+    @tweet = current_user.tweets.create(tweet_params)
     redirect_to tweets_path
   end
 
@@ -14,7 +16,7 @@ class TweetsController < ApplicationController
   end
   
   def destroy
-    @tweet = Tweet.find(params[:id])
+    @tweet = current_user.tweets.find(params[:id])
     @tweet.destroy
     redirect_to tweets_path
   end
