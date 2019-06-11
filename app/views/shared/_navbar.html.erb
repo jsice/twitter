@@ -1,3 +1,11 @@
-<nav class="navbar navbar-dark bg-primary mb-4">
+<nav class="navbar navbar-light bg-light mb-4 shadow-sm">
   <%= link_to "Twitter", tweets_path, class: "navbar-brand" %>
+  <div class="text-right">
+    <% if user_signed_in? %>
+      <%= link_to 'Sign out', destroy_user_session_path, class: "btn btn-danger"  %>
+    <% else %>
+      <%= link_to 'Sign up', new_user_session_path, class: "btn btn-outline-success" %>
+      <%= link_to 'Sign in', new_user_session_path, class: "btn btn-primary" %>
+    <% end %>
+  </div>
 </nav>
