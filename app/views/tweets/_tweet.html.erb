@@ -13,8 +13,10 @@
         <%= link_to "#" do %>
           <%= fa_icon "retweet" %>
         <% end %>
-        <%= link_to tweet_path(tweet), method: :delete do %>
-          <%= fa_icon "trash-o" %>
+        <% if user_signed_in? && current_user.tweets.include?(tweet) %>
+          <%= link_to tweet_path(tweet), method: :delete do %>
+            <%= fa_icon "trash-o" %>
+          <% end %>
         <% end %>
       </div>
     </div>
