@@ -1,0 +1,13 @@
+<h1>
+  Tweets
+</h1>
+<%= form_for :tweet, :url => tweets_path, :html => {:class => "form-horizontal center"} do |t| %>
+  <div class="form-group">
+    <%= t.text_area :content, class: "form-control", placeholder: "What's happening", rows:4 %>
+  </div>
+  <div class="text-right">
+    <%= t.submit "Tweet", class: "btn btn-primary" %>
+  </div>
+<% end %>
+<hr />
+<%= render 'tweets', tweets: @tweets %>
