@@ -1,19 +1,21 @@
 <div>
-  <div class="card mb-3">
-    <div class="card-body">
-      <p class="card-text"><small><%= tweet.created_at %></small></p>
-      <p class="card-text"><%= tweet.content %></p>
+  <%= link_to tweet_path(tweet), class: "clickable-card" do %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <p class="card-text"><small><%= tweet.created_at %></small></p>
+        <p class="card-text"><%= tweet.content %></p>
+      </div>
+      <div class="card-footer">
+        <%= link_to "#" do %>
+          <%= fa_icon "comment-o" %>
+        <% end %>
+        <%= link_to "#" do %>
+          <%= fa_icon "retweet" %>
+        <% end %>
+        <%= link_to tweet_path(tweet), method: :delete do %>
+          <%= fa_icon "trash-o" %>
+        <% end %>
+      </div>
     </div>
-    <div class="card-footer">
-      <%= link_to "#" do %>
-        <%= fa_icon "comment-o" %>
-      <% end %>
-      <%= link_to "#" do %>
-        <%= fa_icon "retweet" %>
-      <% end %>
-      <%= link_to "#", method: :delete do %>
-        <%= fa_icon "trash-o" %>
-      <% end %>
-    </div>
-  </div>
+  <% end %>
 </div>
