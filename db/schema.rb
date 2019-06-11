@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2019_06_11_050800) do
   enable_extension "plpgsql"
 
   create_table "tweets", force: :cascade do |t|
+    t.string "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
