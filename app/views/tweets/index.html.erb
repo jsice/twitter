@@ -1,0 +1,9 @@
+<h1>
+  Tweets
+</h1>
+<%= form_for :tweet do |f| %>
+  <%= f.text_area :content %>
+  <%= f.submit "Tweet" %>
+<% end %>
+<hr />
+<%= render 'tweets', tweets: @tweets %>
