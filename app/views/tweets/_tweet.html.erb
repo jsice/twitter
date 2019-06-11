@@ -2,6 +2,7 @@
   <%= link_to tweet_path(tweet), class: "clickable-card" do %>
     <div class="card mb-3">
       <div class="card-body">
+        <p class="card-title"><%= link_to "@#{tweet.user.name}", user_path(tweet.user) %></p>
         <p class="card-text"><small><%= tweet.created_at %></small></p>
         <p class="card-text"><%= tweet.content %></p>
       </div>
