@@ -12,7 +12,7 @@ class Tweets::RepliesController < ApplicationController
   private
 
   def reply_params
-    params.require(:reply).permit(:content).merge!(tweet_id: params[:tweet_id])
+    params.require(:reply).permit(:content).merge(tweet_id: params[:tweet_id])
   end
 
 end
