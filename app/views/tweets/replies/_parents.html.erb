@@ -1,5 +1,4 @@
-<% if @reply.parent.presence? %>
-  <%= render 'parents', reply: @reply.parent %>
-  <%= render 'tweet', reply: @reply.parent %>
-  <small>Replying to <%= link_to @reply.parent.user.name, user_path(@reply.parent.name) %></small>
+<% if @tweet.parent.present? %>
+  <%= render 'parents', tweet: @tweet.parent %>
+  <%= render 'tweet', tweet: @tweet.parent %>
 <% end %>

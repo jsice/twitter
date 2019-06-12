@@ -6,4 +6,14 @@ class Tweet < ApplicationRecord
 
   scope :replies, -> { where.not(reply_id: nil) }
   scope :tweets, -> { where(reply_id: nil) }
+
+  def reply_to
+    users = []
+    current = parent
+    while current.present?
+      users << current.user
+      current = current.parent
+    end
+    users
+  end
 end

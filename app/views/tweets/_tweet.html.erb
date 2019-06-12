@@ -1,13 +1,20 @@
 <div>
   <div class="card mb-3">
-    <%= link_to tweet_path(tweet), class: "clickable-card" do %>
-      <div class="card-body">
-        <blockquote class="blockquote mb-0">
-          <p><%= tweet.content %></p>
-          <footer class="blockquote-footer"><%= link_to "@#{tweet.user.name}", user_path(tweet.user) %><small><%= " - #{tweet.created_at}" %></small></footer>
-        </blockquote>
-      </div>
-    <% end %>
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        <% if tweet.parent.present? %>
+          <small class="font-weight-light">
+            Replying to 
+            <% tweet.reply_to.each do |u| %>
+              <%= link_to "@#{u.name}", user_path(u) %>
+            <% end %>
+          </small>
+        <% end %>
+        <p><%= link_to tweet.content, tweet_path(tweet), class: "no-style" %></p>
+        <footer class="blockquote-footer"><%= link_to "@#{tweet.user.name}", user_path(tweet.user) %><small><%= " - #{tweet.created_at}" %></small></footer>
+      </blockquote>
+    </div>
+    
     <div class="card-footer">
       <%= link_to tweet_reply_path(tweet) do %>
         <%= fa_icon "comment-o" %>

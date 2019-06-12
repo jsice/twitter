@@ -1,1 +1,3 @@
-<%= render 'parents', reply: @tweet %>
+<%= render 'parents', tweet: @tweet %>
+<%= render 'tweets/tweet', tweet: @tweet %>
+<%= render 'tweets/tweet_form', path: tweet_reply_path(@tweet) %>
