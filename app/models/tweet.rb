@@ -14,6 +14,16 @@ class Tweet < ApplicationRecord
       users << current.user
       current = current.parent
     end
-    users
+    users.uniq
+  end
+
+  def parents
+    tweets = []
+    current = parent
+    while current.present?
+      tweets << current
+      current = current.parent
+    end
+    tweets.reverse
   end
 end

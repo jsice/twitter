@@ -1,0 +1,4 @@
+<% @tweet.parents.each do |parent| %>
+  <%= render 'tweets/tweet', tweet: parent %>
+<% end %>
+<%= render 'tweets/tweet', tweet: @tweet %>
