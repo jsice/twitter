@@ -1,6 +1,7 @@
 class Tweets::RepliesController < ApplicationController
 
   def reply
+    @tweet = Tweet.find(params[:id])
   end
 
   def create
