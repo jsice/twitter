@@ -1,4 +1,4 @@
 <div>
   <h1>@<%= @user.name %></h1>
 </div>
-<%= render @user.tweets %>
+<%= render 'tweets/tweets', tweets: @user.all_tweets %>
