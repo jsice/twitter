@@ -9,4 +9,8 @@ class User < ApplicationRecord
   #retweets
   has_many :users_retweets
   has_many :retweets, through: :users_retweets, source: :tweet
+
+  def all_tweets
+    (tweets.tweets + retweets).uniq.sort.reverse
+  end
 end

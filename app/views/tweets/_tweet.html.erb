@@ -2,6 +2,11 @@
   <div class="card mb-3">
     <div class="card-body">
       <blockquote class="blockquote mb-0">
+        <% if tweet.retweeters.include? current_user %>
+          <p><small class="font-weight-light text-muted">
+            <%= fa_icon "retweet", text: 'You Retweeted', class: "text-sm" %>
+          </small></p>
+        <% end %>
         <% if tweet.parent.present? %>
           <small class="font-weight-light">
             Replying to 
