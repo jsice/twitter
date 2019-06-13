@@ -1,9 +1,5 @@
 class Tweets::RepliesController < ApplicationController
 
-  def reply
-    @tweet = Tweet.find(params[:tweet_id])
-  end
-
   def create
     @reply = current_user.tweets.create(reply_params)
     redirect_to tweet_path(@reply)
