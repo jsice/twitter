@@ -26,4 +26,14 @@ class Tweet < ApplicationRecord
     end
     tweets.reverse
   end
+
+  def first_thread
+    tweets = []
+    current = replies
+    until current.empty?
+      tweets << current.first
+      current = current.first.replies
+    end
+    tweets
+  end
 end

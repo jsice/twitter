@@ -1,6 +1,6 @@
 <div>
   <% tweets.each do |tweet| %>
     <hr />
-    <%= render tweet %>
+    <%= render 'tweets/tweet_with_first_thread', tweet: tweet %>
   <% end %>
 </div>
