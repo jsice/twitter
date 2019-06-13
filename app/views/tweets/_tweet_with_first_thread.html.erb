@@ -1,0 +1,6 @@
+<div class="tweets-block">
+  <%= render tweet %>
+  <% tweet.first_thread.each do |child| %>
+    <%= render child %>
+  <% end %>
+</div>

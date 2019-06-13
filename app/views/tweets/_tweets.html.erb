@@ -1,5 +1,6 @@
 <div>
-  <% @tweets.each do |tweet| %>
-    <%= render 'tweet', tweet: tweet %>
+  <% tweets.each do |tweet| %>
+    <hr />
+    <%= render 'tweets/tweet_with_first_thread', tweet: tweet %>
   <% end %>
 </div>

@@ -12,13 +12,32 @@
  *
  */
 
- a.clickable-card, a.clickable-card:hover {
-   color: inherit;
-   text-decoration: none;
- }
- a.clickable-card:hover {
-   box-shadow: inset 0px 0px 20px #ccc;
-   transition: box-shadow 0.5s linear
- }
- @import "bootstrap";
- @import "font-awesome";
+a.no-style, a.no-style:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+.tweets-block > * {
+  position: relative;
+  -webkit-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.05);
+  -moz-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.05);
+  box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.05);
+}
+
+.tweets-block > :not(:first-child)::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 35px;
+  display: block;
+  width: 10px;
+  height: 60px;
+  background-color: #007bff;
+  -webkit-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.1);
+  -moz-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.1);
+  box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.1);
+  z-index: -1;
+}
+
+@import "bootstrap";
+@import "font-awesome";

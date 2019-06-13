@@ -1,24 +1,32 @@
 <div>
-  <%= link_to tweet_path(tweet), class: "clickable-card" do %>
-    <div class="card mb-3">
-      <div class="card-body">
-        <p class="card-title"><%= link_to "@#{tweet.user.name}", user_path(tweet.user) %></p>
-        <p class="card-text"><small><%= tweet.created_at %></small></p>
-        <p class="card-text"><%= tweet.content %></p>
-      </div>
-      <div class="card-footer">
-        <%= link_to "#" do %>
-          <%= fa_icon "comment-o" %>
+  <div class="card mb-3">
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        <% if tweet.parent.present? %>
+          <small class="font-weight-light">
+            Replying to 
+            <% tweet.reply_to.each do |u| %>
+              <%= link_to "@#{u.name}", user_path(u) %>
+            <% end %>
+          </small>
         <% end %>
-        <%= link_to "#" do %>
-          <%= fa_icon "retweet" %>
-        <% end %>
-        <% if user_signed_in? && current_user.tweets.include?(tweet) %>
-          <%= link_to tweet_path(tweet), method: :delete do %>
-            <%= fa_icon "trash-o" %>
-          <% end %>
-        <% end %>
-      </div>
+        <p><%= link_to tweet.content, tweet_path(tweet), class: "no-style" %></p>
+        <footer class="blockquote-footer"><%= link_to "@#{tweet.user.name}", user_path(tweet.user) %><small><%= " - #{tweet.created_at}" %></small></footer>
+      </blockquote>
     </div>
-  <% end %>
+    
+    <div class="card-footer">
+      <%= link_to tweet_path(tweet), class: "text-primary mr-3" do %>
+        <%= fa_icon "comment-o lg", text: tweet.replies.count > 0 ? tweet.replies.count.to_s : "" %>
+      <% end %>
+      <%= link_to "#", class: "text-success mr-3" do %>
+        <%= fa_icon "retweet lg" %>
+      <% end %>
+      <% if user_signed_in? && current_user.tweets.include?(tweet) %>
+        <%= link_to tweet_path(tweet), method: :delete, class: "text-danger mr-3" do %>
+          <%= fa_icon "trash-o lg" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>
