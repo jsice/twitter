@@ -16,14 +16,20 @@
     </div>
     
     <div class="card-footer">
-      <%= link_to tweet_path(tweet), class: "text-primary mr-3" do %>
+      <%= link_to tweet_path(tweet), class: "text-primary mr-3 text-decoration-none" do %>
         <%= fa_icon "comment-o lg", text: tweet.replies.empty? ? "" : tweet.replies.size.to_s %>
       <% end %>
-      <%= link_to "#", class: "text-success mr-3" do %>
-        <%= fa_icon "retweet lg" %>
+      <% if current_user.retweets.include? tweet %>
+        <%= link_to tweet_retweet_path(tweet), method: :delete, class: "text-success mr-3 text-decoration-none" do %>
+          <%= fa_icon "retweet lg", text: tweet.retweeters.empty? ? "" : tweet.retweeters.size.to_s %>
+        <% end %>
+      <% else %>
+        <%= link_to tweet_retweet_path(tweet), method: :post, class: "text-muted mr-3 text-decoration-none" do %>
+          <%= fa_icon "retweet lg", text: tweet.retweeters.empty? ? "" : tweet.retweeters.size.to_s %>
+        <% end %>
       <% end %>
       <% if user_signed_in? && current_user.tweets.include?(tweet) %>
-        <%= link_to tweet_path(tweet), method: :delete, class: "text-danger mr-3" do %>
+        <%= link_to tweet_path(tweet), method: :delete, class: "text-danger mr-3 text-decoration-none" do %>
           <%= fa_icon "trash-o lg" %>
         <% end %>
       <% end %>
