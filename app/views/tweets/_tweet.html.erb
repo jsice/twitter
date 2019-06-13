@@ -17,7 +17,7 @@
     
     <div class="card-footer">
       <%= link_to tweet_path(tweet), class: "text-primary mr-3" do %>
-        <%= fa_icon "comment-o lg", text: tweet.replies.count > 0 ? tweet.replies.count.to_s : "" %>
+        <%= fa_icon "comment-o lg", text: tweet.replies.empty? ? "" : tweet.replies.size.to_s %>
       <% end %>
       <%= link_to "#", class: "text-success mr-3" do %>
         <%= fa_icon "retweet lg" %>
