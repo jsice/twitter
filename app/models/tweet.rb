@@ -9,6 +9,10 @@ class Tweet < ApplicationRecord
   has_many :users_retweets
   has_many :retweeters, through: :users_retweets, source: :user
 
+  #likes
+  has_many :likes
+  has_many :liking_users, through: :likes, source: :user
+
   scope :replies, -> { where.not(reply_id: nil) }
   scope :tweets, -> { where(reply_id: nil) }
 
