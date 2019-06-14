@@ -1,4 +1,8 @@
 class Tweet < ApplicationRecord
+  acts_as_taggable_on :hashtags
+
+  before_save :add_hashtags
+
   belongs_to :user
   
   #replies
@@ -44,5 +48,12 @@ class Tweet < ApplicationRecord
       current = current.first.replies
     end
     tweets
+  end
+
+  private
+
+  def add_hashtags
+    hashtags = content.scan(/(?:\s|^)(?:#(?!(?:\d+|\w+?_|_\w+?)(?:\s|$)))(\w+)(?=\s|$)/i)
+    hashtag_list.add(hashtags)
   end
 end

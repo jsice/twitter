@@ -1,0 +1,8 @@
+<div>
+  <h1>Trends</h1>
+  <div class="list-group">
+    <% hashtags.each_with_index do |hashtag, index| %>
+      <%= link_to "#{index+1}. ##{hashtag}", hashtag_path(hashtag.name), class: "list-group-item list-group-item-action" %>
+    <% end %>
+  </div>
+</div>
