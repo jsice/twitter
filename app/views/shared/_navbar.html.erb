@@ -2,6 +2,7 @@
   <%= link_to "Twitter", tweets_path, class: "navbar-brand" %>
   <div class="text-right">
     <% if user_signed_in? %>
+      <%= link_to 'Edit user', edit_user_registration_path, class: "btn btn-outline-secondary"  %>
       <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "btn btn-danger"  %>
     <% else %>
       <%= link_to 'Sign up', new_user_registration_path, class: "btn btn-outline-success" %>
