@@ -2,6 +2,6 @@
   <% if word.starts_with? "#" %>
     <%= link_to word, hashtag_path(word[1...]) %>
   <% else %>
-    word
+    <%= word %>
   <% end %>
 <% end %>
