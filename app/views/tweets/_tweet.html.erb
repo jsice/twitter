@@ -20,7 +20,7 @@
             <% end %>
           </small>
         <% end %>
-        <p><%= link_to tweet.content, tweet_path(tweet), class: "no-style" %></p>
+        <p><%= render 'tweets/content', content: tweet.content %></p>
         <footer class="blockquote-footer"><%= link_to "@#{tweet.user.name}", user_path(tweet.user) %><small><%= " - #{tweet.created_at}" %></small></footer>
       </blockquote>
     </div>

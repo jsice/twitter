@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     delete '/like', to: 'tweets/likes#destroy'
   end
   resources :users, only: [:show]
+  get 'hashtags/:hashtag', to: 'hashtags#show', as: :hashtag
   
   root to: 'tweets#index'
 end

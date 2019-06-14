@@ -1,0 +1,7 @@
+<% content.split(" ").each do |word| %>
+  <% if word.starts_with? "#" %>
+    <%= link_to word, hashtag_path(word[1...]) %>
+  <% else %>
+    word
+  <% end %>
+<% end %>
