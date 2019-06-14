@@ -33,6 +33,15 @@
           <%= fa_icon "retweet lg", text: tweet.retweeters.empty? ? "" : tweet.retweeters.size.to_s %>
         <% end %>
       <% end %>
+      <% if current_user.liked_tweets.include? tweet %>
+        <%= link_to tweet_like_path(tweet), method: :delete, class: "text-danger mr-3 text-decoration-none" do %>
+          <%= fa_icon "heart lg", text: tweet.liking_users.empty? ? "" : tweet.liking_users.size.to_s %>
+        <% end %>
+      <% else %>
+        <%= link_to tweet_like_path(tweet), method: :post, class: "text-danger mr-3 text-decoration-none" do %>
+          <%= fa_icon "heart-o lg", text: tweet.liking_users.empty? ? "" : tweet.liking_users.size.to_s %>
+        <% end %>
+      <% end %>
       <% if user_signed_in? && current_user.tweets.include?(tweet) %>
         <%= link_to tweet_path(tweet), method: :delete, class: "text-danger mr-3 text-decoration-none" do %>
           <%= fa_icon "trash-o lg" %>

@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     post '/reply', to: 'tweets/replies#create'
     post '/retweet', to: 'tweets/retweets#create'
     delete '/retweet', to: 'tweets/retweets#destroy'
+    post '/like', to: 'tweets/likes#create'
+    delete '/like', to: 'tweets/likes#destroy'
   end
   resources :users, only: [:show]
   
