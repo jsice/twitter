@@ -1,0 +1,17 @@
+<blockquote class="blockquote mb-0">
+  <% if tweet.retweeters.include? current_user %>
+    <p><small class="font-weight-light text-muted">
+      <%= fa_icon "retweet", text: 'You Retweeted', class: "text-sm" %>
+    </small></p>
+  <% end %>
+  <% if tweet.parent.present? %>
+    <small class="font-weight-light">
+      Replying to 
+      <% tweet.reply_to.each do |u| %>
+        <%= link_to "@#{u.name}", user_path(u) %>
+      <% end %>
+    </small>
+  <% end %>
+  <p><%= render 'tweets/content', content: tweet.content %></p>
+  <footer class="blockquote-footer"><%= link_to "@#{tweet.user.name}", user_path(tweet.user) %><small><%= " - #{tweet.created_at}" %></small></footer>
+</blockquote>

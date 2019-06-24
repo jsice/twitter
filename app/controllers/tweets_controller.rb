@@ -4,6 +4,7 @@ class TweetsController < ApplicationController
 
   def index
     @tweets = Tweet.tweets.reverse
+    @new_tweet = Tweet.new (params.permit(:tweet_id))
   end
 
   def create
@@ -13,6 +14,7 @@ class TweetsController < ApplicationController
 
   def show
     @tweet = Tweet.find(params[:id])
+    @new_tweet = Tweet.new 
   end
   
   def destroy
@@ -24,7 +26,7 @@ class TweetsController < ApplicationController
   private
 
   def tweet_params
-    params.require(:tweet).permit(:content)
+    params.require(:tweet).permit(:content, :tweet_id)
   end
 
 end

@@ -19,6 +19,10 @@ class Tweet < ApplicationRecord
   has_many :likes
   has_many :liking_users, through: :likes, source: :user
 
+  #retweet_with_comment
+  belongs_to :commentee, class_name: "Tweet", foreign_key: "tweet_id", optional: true
+  has_many :commenters, class_name: "Tweet", foreign_key: "tweet_id"
+
   scope :replies, -> { where.not(reply_id: nil) }
   scope :tweets, -> { where(reply_id: nil) }
 
