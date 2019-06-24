@@ -3,7 +3,7 @@ class TweetsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    @tweets = Tweet.tweets.reverse
+    @tweets = Tweet.all
     @new_tweet = Tweet.new (params.permit(:tweet_id))
   end
 
