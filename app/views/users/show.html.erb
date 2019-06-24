@@ -1,4 +1,17 @@
 <div>
-  <h1>@<%= @user.name %></h1>
+  <h1>
+    @<%= @user.name %>
+    <% if @user != current_user %>
+      <% if current_user.followings.include? @user %>
+        <%= link_to user_follow_path(@user), class: "btn btn-outline-success active", method: :delete  do %>
+          Following
+        <% end %>
+      <% else %>
+        <%= link_to user_follow_path(@user), class: "btn btn-outline-success", method: :post  do %>
+          <%= fa_icon "plus", text: "Follow"%>
+        <% end %>
+      <% end %>
+    <% end %>
+  </h1>
 </div>
 <%= render 'tweets/tweets', tweets: @user.all_tweets %>

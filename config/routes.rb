@@ -10,7 +10,12 @@ Rails.application.routes.draw do
     post '/like', to: 'tweets/likes#create'
     delete '/like', to: 'tweets/likes#destroy'
   end
-  resources :users, only: [:show]
+
+  resources :users, only: [:show] do
+    post '/follow', to: 'users/followers#create'
+    delete '/follow', to: 'users/followers#destroy' 
+  end
+  
   get 'hashtags/:hashtag', to: 'hashtags#show', as: :hashtag
   
   root to: 'tweets#index'
