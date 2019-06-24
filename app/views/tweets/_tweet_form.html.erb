@@ -1,6 +1,6 @@
 <%= form_for Tweet.new, :url => path, :html => {:class => "form-horizontal center"} do |t| %>
   <div class="form-group">
-    <%= t.text_area :content, class: "form-control", placeholder: "What's happening", rows:4 %>
+    <%= t.text_area :content, class: "form-control", placeholder: "What's happening", rows:4, required: true, maxlength: 256 %>
   </div>
   <div class="text-right">
     <%= t.submit "Tweet", class: "btn btn-primary" %>

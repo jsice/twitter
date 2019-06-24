@@ -1,4 +1,6 @@
 class Tweet < ApplicationRecord
+  validates :content, presence: true, length: { maximum: 256 }
+  
   acts_as_taggable_on :hashtags
 
   before_save :add_hashtags
