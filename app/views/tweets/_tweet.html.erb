@@ -6,11 +6,11 @@
           <%= fa_icon "trash-o lg" %>
         <% end %>
       <% end %>
-      <%= render 'tweet_content', tweet: tweet %>
+      <%= render 'tweets/tweet_content', tweet: tweet %>
       <% if tweet.commentee %>
         <%#= link_to tweet_path(tweet.commentee) do %>
           <div class="border rounded p-2 m-2 ml-4">
-            <%= render 'tweet_content', tweet: tweet.commentee %>
+            <%= render 'tweets/tweet_content', tweet: tweet.commentee %>
           </div>
         <%# end %>
       <% end %>
