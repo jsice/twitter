@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_24_063346) do
+ActiveRecord::Schema.define(version: 2019_06_25_072542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,8 @@ ActiveRecord::Schema.define(version: 2019_06_24_063346) do
     t.bigint "user_id", null: false
     t.bigint "reply_id"
     t.bigint "tweet_id"
+    t.datetime "published_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "deleted_at"
     t.index ["reply_id"], name: "index_tweets_on_reply_id"
     t.index ["tweet_id"], name: "index_tweets_on_tweet_id"
     t.index ["user_id"], name: "index_tweets_on_user_id"

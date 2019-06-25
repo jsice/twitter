@@ -4,6 +4,7 @@ class Tweet < ApplicationRecord
   acts_as_taggable_on :hashtags
 
   before_save :add_hashtags
+  before_save :set_published_at
 
   belongs_to :user
   
@@ -61,5 +62,9 @@ class Tweet < ApplicationRecord
   def add_hashtags
     hashtags = content.scan(/(?:\s|^)(?:#(?!(?:\d+|\w+?_|_\w+?)(?:\s|$)))(\w+)(?=\s|$)/i)
     hashtag_list.add(hashtags)
+  end
+
+  def set_published_at
+    self.published_at = Time.now if self.published_at.nil?
   end
 end
