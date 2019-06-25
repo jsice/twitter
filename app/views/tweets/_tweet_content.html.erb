@@ -12,6 +12,11 @@
       <% end %>
     </small>
   <% end %>
+  <% unless tweet.deleted_at.nil? %>
+    <small class="font-weight-light text-muted">
+      This tweet will be removed in <%= time_ago_in_words(tweet.deleted_at) %>
+    </small>
+  <% end %>
   <p><%= render 'tweets/content', content: tweet.content %></p>
-  <footer class="blockquote-footer"><%= link_to "@#{tweet.user.name}", user_path(tweet.user) %><small><%= " - #{tweet.created_at}" %></small></footer>
+  <footer class="blockquote-footer"><%= link_to "@#{tweet.user.name}", user_path(tweet.user) %><small><%= " - #{time_ago_in_words(tweet.published_at)}" %></small></footer>
 </blockquote>
