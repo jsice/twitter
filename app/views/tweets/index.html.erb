@@ -2,4 +2,8 @@
   Tweets
 </h1>
 <%= render 'tweet_form', path: tweets_path %>
-<%= render 'tweets', tweets: @tweets %>
+<%#= render 'tweets', tweets: @tweets %>
+<div class="tweets">
+  <%= render @tweets %>
+</div>
+<%= will_paginate @tweets, renderer: WillPaginateInfinite::InfinitePagination %>
