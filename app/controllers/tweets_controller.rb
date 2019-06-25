@@ -12,6 +12,7 @@ class TweetsController < ApplicationController
   end
 
   def create
+    zz
     @tweet = current_user.tweets.create(tweet_params)
     redirect_to tweets_path
   end
@@ -30,7 +31,7 @@ class TweetsController < ApplicationController
   private
 
   def tweet_params
-    params.require(:tweet).permit(:content, :tweet_id)
+    params.require(:tweet).permit(:content, :tweet_id, :published_at, :deleted_at)
   end
 
 end
