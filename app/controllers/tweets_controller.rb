@@ -12,7 +12,12 @@ class TweetsController < ApplicationController
   end
 
   def create
-    @tweet = current_user.tweets.create(tweet_params)
+    offset = cookies["time_zone_offset"].to_i
+    time_zone = ActiveSupport::TimeZone[-offset.minutes]
+    @tweet = current_user.tweets.new(tweet_params)
+    params[:tweet][:published_at] && @tweet.published_at = time_zone.parse(params[:tweet][:published_at])
+    params[:tweet][:deleted_at] && @tweet.deleted_at = time_zone.parse(params[:tweet][:deleted_at])
+    @tweet.save
     redirect_to tweets_path
   end
 
@@ -30,7 +35,7 @@ class TweetsController < ApplicationController
   private
 
   def tweet_params
-    params.require(:tweet).permit(:content, :tweet_id, :published_at, :deleted_at)
+    params.require(:tweet).permit(:content, :tweet_id)
   end
 
 end

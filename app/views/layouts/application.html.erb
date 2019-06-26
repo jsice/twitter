@@ -24,5 +24,10 @@
         </div>
       </div>
     </div>
+    <script>
+      var currentTime = new Date();
+      var utcOffset = currentTime.getTimezoneOffset()
+      document.cookie = 'time_zone_offset='+utcOffset+';';
+    </script>
   </body>
 </html>
