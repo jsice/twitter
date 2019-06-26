@@ -17,6 +17,6 @@ class ApplicationController < ActionController::Base
   end
 
   def show_suggestions
-    @suggestions = current_user&.related_users
+    @suggestions = current_user&.related_users[0..5]
   end
 end
