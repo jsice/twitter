@@ -3,7 +3,7 @@
 </h1>
 <%= render 'tweet_form', path: tweets_path %>
 <%#= render 'tweets', tweets: @tweets %>
-<div class="tweets">
+<div class="tweets mt-3">
   <%= render @tweets %>
 </div>
 <%= will_paginate @tweets, renderer: WillPaginateInfinite::InfinitePagination %>
