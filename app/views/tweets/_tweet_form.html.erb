@@ -8,6 +8,14 @@
       <%= render 'tweet_content', tweet: @new_tweet.commentee %>
     </div>
   <% end %>
+  <div class="form-group">
+    <%= t.label :published_at %> :
+    <%= t.datetime_field :published_at, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= t.label :deleted_at %> :
+    <%= t.datetime_field :deleted_at, class: "form-control" %>
+  </div>
   <div class="text-right">
     <%= t.submit "Tweet", class: "btn btn-primary" %>
   </div>

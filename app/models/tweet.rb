@@ -4,6 +4,7 @@ class Tweet < ApplicationRecord
   acts_as_taggable_on :hashtags
 
   before_save :add_hashtags
+  before_save :set_published_at
 
   belongs_to :user
   
@@ -25,6 +26,7 @@ class Tweet < ApplicationRecord
 
   scope :replies, -> { where.not(reply_id: nil) }
   scope :tweets, -> { where(reply_id: nil) }
+  scope :present, -> { where("published_at <= '#{Time.current}'").where("deleted_at is null OR deleted_at > '#{Time.current}'") }
 
   def reply_to
     users = []
@@ -61,5 +63,9 @@ class Tweet < ApplicationRecord
   def add_hashtags
     hashtags = content.scan(/(?:\s|^)(?:#(?!(?:\d+|\w+?_|_\w+?)(?:\s|$)))(\w+)(?=\s|$)/i)
     hashtag_list.add(hashtags)
+  end
+
+  def set_published_at
+    self.published_at = Time.now if self.published_at.nil?
   end
 end
