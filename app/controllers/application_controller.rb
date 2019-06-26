@@ -14,4 +14,8 @@ class ApplicationController < ActionController::Base
   def show_hashtags
     @hashtags = ActsAsTaggableOn::Tag.most_used(10)
   end
+
+  def show_suggestions
+    @suggestions = current_user&.related_users
+  end
 end

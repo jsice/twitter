@@ -23,6 +23,10 @@ class User < ApplicationRecord
   has_many :followers, through: :user_followings
 
   def all_tweets
-    (tweets.tweets + retweets).uniq.sort.reverse
+    (tweets.tweets + retweets).uniq.sort_by { |tweet| tweet.published_at } .reverse
+  end
+
+  def related_users
+    tweets.map(&:find_related_hashtags).flatten.map(&:user).uniq
   end
 end
