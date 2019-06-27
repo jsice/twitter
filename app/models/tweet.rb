@@ -40,16 +40,6 @@ class Tweet < ApplicationRecord
     users.uniq
   end
 
-  def parents
-    tweets = []
-    current = parent
-    while current.present?
-      tweets << current
-      current = current.parent
-    end
-    tweets.reverse
-  end
-
   def first_thread
     tweets = []
     current = replies
