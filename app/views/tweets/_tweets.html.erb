@@ -1,6 +1,7 @@
-<div>
+<div class="tweets mt-3">
   <% tweets.each do |tweet| %>
     <hr />
     <%= render 'tweets/tweet', tweet: tweet %>
   <% end %>
 </div>
+<%= will_paginate tweets, renderer: WillPaginateInfinite::InfinitePagination %>

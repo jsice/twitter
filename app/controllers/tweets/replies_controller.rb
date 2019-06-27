@@ -2,7 +2,7 @@ class Tweets::RepliesController < ApplicationController
 
   def create
     reply = current_user.tweets.create(reply_params)
-    redirect_to tweet_path(reply)
+    redirect_to tweet_path(reply.parent)
   end
 
   private
