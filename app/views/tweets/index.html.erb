@@ -1,7 +1,7 @@
 <h1>
   Tweets
 </h1>
-<%= render 'tweet_form', path: tweets_path %>
+<%= render 'tweet_form', path: tweets_path, new_tweet: @new_tweet %>
 <div class="tweets mt-3">
   <%= render @tweets %>
 </div>
