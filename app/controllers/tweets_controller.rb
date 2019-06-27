@@ -4,7 +4,7 @@ class TweetsController < ApplicationController
 
   def index
     @tweets = Tweet.present
-    if params[:search]
+    if params[:search].present?
       @tweets = @tweets.search params[:search]
     end
     @tweets = @tweets.order('published_at DESC').paginate(page: params[:page], per_page: 5)
