@@ -1,6 +1,4 @@
 <h1>
   #<%= @hashtag %>
 </h1>
-<div class="tweets mt-3">
-  <%= render @tweets %>
-</div>
+<%= render 'tweets/tweets', tweets: @tweets %>
