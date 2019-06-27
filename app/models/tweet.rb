@@ -58,6 +58,10 @@ class Tweet < ApplicationRecord
     tweets
   end
 
+  def self.search(term)
+    where("content LIKE ?", "%#{term}%")
+  end
+
   private
 
   def add_hashtags
