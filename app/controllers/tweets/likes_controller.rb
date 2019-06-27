@@ -8,7 +8,7 @@ class Tweets::LikesController < ApplicationController
 
   def destroy
     tweet = Tweet.find(params[:tweet_id])
-    Like.find_by(tweet: tweet, user: current_user).destroy
+    Like.find_by(tweet: tweet, user: current_user)&.destroy
     redirect_back fallback_location: ''
   end
   

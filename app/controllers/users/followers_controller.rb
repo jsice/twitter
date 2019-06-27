@@ -7,7 +7,7 @@ class Users::FollowersController < ApplicationController
 
   def destroy
     user = User.find(params[:user_id])
-    UserFollower.find_by(following: user, follower: current_user).destroy
+    UserFollower.find_by(following: user, follower: current_user)&.destroy
     redirect_back fallback_location: ''
   end
   
