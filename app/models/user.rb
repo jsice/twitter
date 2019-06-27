@@ -9,12 +9,12 @@ class User < ApplicationRecord
   has_many :tweets, dependent: :destroy
 
   #retweets
-  has_many :users_retweets
-  has_many :retweets, through: :users_retweets, source: :tweet, dependent: :destroy
+  has_many :users_retweets, dependent: :destroy
+  has_many :retweets, through: :users_retweets, source: :tweet
 
   #likes
-  has_many :likes
-  has_many :liked_tweets, through: :likes, source: :tweet, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :liked_tweets, through: :likes, source: :tweet
 
   #followers
   has_many :user_followers, foreign_key: "follower_id", class_name: "UserFollower", dependent: :destroy

@@ -1,3 +1,5 @@
-<%= render 'tweet_with_parents', tweet: @tweet %>
-<%= render 'tweet_form', path: tweet_reply_path(@tweet) %>
-<%= render 'tweets', tweets: @tweet.replies %>
+<%= render @tweet %>
+<%= render 'tweet_form', path: tweet_reply_path(@tweet), new_tweet: @new_tweet %>
+<div class="tweets mt-3">
+  <%= render @tweet.replies %>
+</div>

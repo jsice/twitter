@@ -14,4 +14,6 @@
     <% end %>
   </h1>
 </div>
-<%= render 'tweets/tweets', tweets: @user.all_tweets %>
+<div class="tweets mt-3">
+  <%= render @user.all_tweets %>
+</div>

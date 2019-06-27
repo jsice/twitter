@@ -1,11 +1,11 @@
-<%= form_for @new_tweet, :url => path, :html => {:class => "form-horizontal center"} do |t| %>
+<%= form_for new_tweet, :url => path, :html => {:class => "form-horizontal center"} do |t| %>
   <div class="form-group">
     <%= t.text_area :content, class: "form-control", placeholder: "What's happening", rows:4, required: true, maxlength: 256 %>
   </div>
-  <% if @new_tweet.commentee %>
+  <% if new_tweet.commentee %>
     <div class="border rounded p-2 mb-2 ml-4">
-      <%= t.text_field :tweet_id, value: @new_tweet.commentee.id, hidden:true %>
-      <%= render 'tweet_content', tweet: @new_tweet.commentee %>
+      <%= t.text_field :tweet_id, value: new_tweet.commentee.id, hidden:true %>
+      <%= render 'tweet_content', tweet: new_tweet.commentee %>
     </div>
   <% end %>
   <div class="form-group">

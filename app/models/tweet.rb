@@ -10,23 +10,25 @@ class Tweet < ApplicationRecord
   
   #replies
   belongs_to :parent, class_name: "Tweet", foreign_key: "reply_id", optional: true
-  has_many :replies, class_name: "Tweet", foreign_key: "reply_id"
+  has_many :replies, class_name: "Tweet", foreign_key: "reply_id", dependent: :destroy
   
   #retweets
-  has_many :users_retweets
+  has_many :users_retweets, dependent: :destroy
   has_many :retweeters, through: :users_retweets, source: :user
 
   #likes
-  has_many :likes
+  has_many :likes, dependent: :destroy
   has_many :liking_users, through: :likes, source: :user
 
   #retweet_with_comment
   belongs_to :commentee, class_name: "Tweet", foreign_key: "tweet_id", optional: true
-  has_many :commenters, class_name: "Tweet", foreign_key: "tweet_id"
+  has_many :commenters, class_name: "Tweet", foreign_key: "tweet_id", dependent: :destroy
 
   scope :replies, -> { where.not(reply_id: nil) }
   scope :tweets, -> { where(reply_id: nil) }
-  scope :present, -> { where("published_at <= '#{Time.current}'").where("deleted_at is null OR deleted_at > '#{Time.current}'") }
+  scope :published, -> { where('published_at <= ?', Time.current) }
+  scope :not_deleted, -> { where.not('deleted_at <= ?', Time.current).or(where(deleted_at: nil)) }
+  scope :present, -> { published.not_deleted }
 
   def reply_to
     users = []
@@ -36,26 +38,6 @@ class Tweet < ApplicationRecord
       current = current.parent
     end
     users.uniq
-  end
-
-  def parents
-    tweets = []
-    current = parent
-    while current.present?
-      tweets << current
-      current = current.parent
-    end
-    tweets.reverse
-  end
-
-  def first_thread
-    tweets = []
-    current = replies
-    until current.empty?
-      tweets << current.first
-      current = current.first.replies
-    end
-    tweets
   end
 
   def self.search(term)
@@ -70,6 +52,6 @@ class Tweet < ApplicationRecord
   end
 
   def set_published_at
-    self.published_at = Time.now if self.published_at.nil?
+    self.published_at = Time.now if published_at.nil?
   end
 end
