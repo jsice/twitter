@@ -27,6 +27,6 @@ class User < ApplicationRecord
   end
 
   def related_users
-    tweets.map(&:find_related_hashtags).flatten.map(&:user).uniq
+    tweets.map(&:find_related_hashtags).flatten.map(&:user).uniq - [self]
   end
 end
