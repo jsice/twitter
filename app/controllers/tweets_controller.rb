@@ -3,7 +3,9 @@ class TweetsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    @tweets = Tweet.present.order('published_at DESC').paginate(page: params[:page], per_page: 5)
+    @tweets = Tweet.present
+    @tweets = @tweets.search params[:search] if params[:search].present?
+    @tweets = @tweets.order('published_at DESC').paginate(page: params[:page], per_page: 5)
     @new_tweet = Tweet.new (params.permit(:tweet_id))
     respond_to do |format|
       format.html
