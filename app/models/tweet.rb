@@ -40,16 +40,6 @@ class Tweet < ApplicationRecord
     users.uniq
   end
 
-  def first_thread
-    tweets = []
-    current = replies
-    until current.empty?
-      tweets << current.first
-      current = current.first.replies
-    end
-    tweets
-  end
-
   def self.search(term)
     where("content LIKE ?", "%#{term}%")
   end
@@ -62,6 +52,6 @@ class Tweet < ApplicationRecord
   end
 
   def set_published_at
-    self.published_at = Time.now if self.published_at.nil?
+    self.published_at = Time.now if published_at.nil?
   end
 end
