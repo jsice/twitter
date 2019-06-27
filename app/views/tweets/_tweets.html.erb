@@ -4,4 +4,4 @@
     <%= render 'tweets/tweet', tweet: tweet %>
   <% end %>
 </div>
-<%= will_paginate @tweets, renderer: WillPaginateInfinite::InfinitePagination %>
+<%= will_paginate tweets, renderer: WillPaginateInfinite::InfinitePagination %>
