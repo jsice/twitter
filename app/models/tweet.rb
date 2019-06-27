@@ -26,7 +26,9 @@ class Tweet < ApplicationRecord
 
   scope :replies, -> { where.not(reply_id: nil) }
   scope :tweets, -> { where(reply_id: nil) }
-  scope :present, -> { where("published_at <= '#{Time.current}'").where("deleted_at is null OR deleted_at > '#{Time.current}'") }
+  scope :published, -> { where('published_at <= ?', Time.current) }
+  scope :not_deleted, -> { where.not('deleted_at <= ?', Time.current).or(where(deleted_at: nil)) }
+  scope :present, -> { published.not_deleted }
 
   def reply_to
     users = []
