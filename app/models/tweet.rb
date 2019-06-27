@@ -10,19 +10,19 @@ class Tweet < ApplicationRecord
   
   #replies
   belongs_to :parent, class_name: "Tweet", foreign_key: "reply_id", optional: true
-  has_many :replies, class_name: "Tweet", foreign_key: "reply_id"
+  has_many :replies, class_name: "Tweet", foreign_key: "reply_id", dependent: :destroy
   
   #retweets
-  has_many :users_retweets
+  has_many :users_retweets, dependent: :destroy
   has_many :retweeters, through: :users_retweets, source: :user
 
   #likes
-  has_many :likes
+  has_many :likes, dependent: :destroy
   has_many :liking_users, through: :likes, source: :user
 
   #retweet_with_comment
   belongs_to :commentee, class_name: "Tweet", foreign_key: "tweet_id", optional: true
-  has_many :commenters, class_name: "Tweet", foreign_key: "tweet_id"
+  has_many :commenters, class_name: "Tweet", foreign_key: "tweet_id", dependent: :destroy
 
   scope :replies, -> { where.not(reply_id: nil) }
   scope :tweets, -> { where(reply_id: nil) }
