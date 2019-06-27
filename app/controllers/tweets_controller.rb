@@ -16,10 +16,10 @@ class TweetsController < ApplicationController
   def create
     offset = cookies["time_zone_offset"].to_i
     time_zone = ActiveSupport::TimeZone[-offset.minutes]
-    @tweet = current_user.tweets.new(tweet_params)
-    @tweet.published_at = time_zone.parse(params[:tweet][:published_at]) if params[:tweet][:published_at]
-    @tweet.deleted_at = time_zone.parse(params[:tweet][:deleted_at]) if params[:tweet][:deleted_at]
-    @tweet.save
+    tweet = current_user.tweets.new(tweet_params)
+    tweet.published_at = time_zone.parse(params[:tweet][:published_at]) if params[:tweet][:published_at]
+    tweet.deleted_at = time_zone.parse(params[:tweet][:deleted_at]) if params[:tweet][:deleted_at]
+    tweet.save
     redirect_to tweets_path
   end
 
