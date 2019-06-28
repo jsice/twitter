@@ -2,7 +2,7 @@
   <div class="card mb-3">
     <div class="card-body">
       <% if user_signed_in? && current_user.tweets.include?(tweet) %>
-        <%= link_to tweet_path(tweet), method: :delete, class: "text-danger mr-3 text-decoration-none float-right" do %>
+        <%= link_to tweet_path(tweet), method: :delete, class: "text-danger mr-3 text-decoration-none float-right", remote: true do %>
           <%= fa_icon "trash-o lg" %>
         <% end %>
       <% end %>
