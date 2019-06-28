@@ -1,4 +1,4 @@
-<div>
+<%= content_tag :div, id: "tweet-#{tweet.id}" do %>
   <div class="card mb-3">
     <div class="card-body">
       <% if user_signed_in? && current_user.tweets.include?(tweet) %>
@@ -17,11 +17,11 @@
     <div class="card-footer">
       <% if user_signed_in? %>
         <% if current_user.liked_tweets.include? tweet %>
-          <%= link_to tweet_like_path(tweet), method: :delete, class: "text-danger mr-3 text-decoration-none" do %>
+          <%= link_to tweet_like_path(tweet), method: :delete, class: "text-danger mr-3 text-decoration-none", remote: true do %>
             <%= fa_icon "heart lg", text: tweet.liking_users.empty? ? "" : tweet.liking_users.size.to_s %>
           <% end %>
         <% else %>
-          <%= link_to tweet_like_path(tweet), method: :post, class: "text-danger mr-3 text-decoration-none" do %>
+          <%= link_to tweet_like_path(tweet), method: :post, class: "text-danger mr-3 text-decoration-none", remote: true do %>
             <%= fa_icon "heart-o lg", text: tweet.liking_users.empty? ? "" : tweet.liking_users.size.to_s %>
           <% end %>
         <% end %>
@@ -43,4 +43,4 @@
       <% end %>
     </div>
   </div>
-</div>
+<% end %>
