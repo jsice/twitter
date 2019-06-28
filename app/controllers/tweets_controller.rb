@@ -24,7 +24,7 @@ class TweetsController < ApplicationController
   end
 
   def show
-    @tweet = Tweet.find(params[:id])
+    @tweet = Tweet.find(params[:id]) or raise("not found")
     @replies = @tweet.replies.order('published_at DESC').paginate(page: params[:page], per_page: 5)
     @new_tweet = Tweet.new 
   end
