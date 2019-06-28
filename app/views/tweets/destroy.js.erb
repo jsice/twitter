@@ -1,0 +1,4 @@
+$('<%= "#tweet-#{@tweet_id}" %>').remove()
+if ($('#main-tweet').text() === "") {
+  window.location.replace('/tweets')
+}

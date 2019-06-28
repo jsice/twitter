@@ -31,7 +31,10 @@ class TweetsController < ApplicationController
   
   def destroy
     current_user.tweets.find(params[:id])&.destroy
-    redirect_to tweets_path
+    @tweet_id = params[:id]
+    respond_to do |format|
+      format.js
+    end
   end
 
   private
