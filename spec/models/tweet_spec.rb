@@ -55,5 +55,15 @@ RSpec.describe Tweet, type: :model do
       let(:retweeters) { [ (User.create name: "Name2", email: "test2@test.com", password: "password2", retweets: [subject]) ] }
       it { should have_many :retweeters }
     end
+
+    context 'likes' do
+      let(:liking_users) { 
+        [ 
+          user,
+          (User.create name: "Name2", email: "test2@test.com", password: "password2", retweets: [subject])
+        ] 
+      }
+      it { should have_many :liking_users }
+    end
   end
 end
