@@ -50,5 +50,10 @@ RSpec.describe Tweet, type: :model do
       it { should belong_to :commentee }
       it { should have_many :commenters }
     end
+
+    context 'retweets' do
+      let(:retweeters) { [ (User.create name: "Name2", email: "test2@test.com", password: "password2", retweets: [subject]) ] }
+      it { should have_many :retweeters }
+    end
   end
 end
