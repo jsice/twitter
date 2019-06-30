@@ -36,5 +36,12 @@ RSpec.describe Tweet, type: :model do
     subject { described_class.create user: user, content: "Content" }
 
     it { should belong_to :user }
+
+    context 'reply' do
+      let(:parent) { described_class.create user: user, content: "Parent", replies: [subject] }
+      let(:replies) { [ (described_class.create user: user, content: "Reply", parent: subject) ] }
+      it { should belong_to :parent }
+      it { should have_many :replies }
+    end
   end
 end
