@@ -66,4 +66,20 @@ RSpec.describe Tweet, type: :model do
       it { should have_many :liking_users }
     end
   end
+
+  context 'scopes' do
+    let(:user) { User.create name: "Name", email: "test@test.com", password: "password" }
+    subject { described_class.create user: user, content: "Content" }
+    context 'replies' do
+      let(:reply) { described_class.create user: user, content: "Reply", parent: subject }
+      let(:non_reply) { described_class.create user: user, content: "Non Reply" }
+      it 'includes tweets with parent' do
+        Tweet.replies.should include(reply)
+      end
+
+      it 'includes tweets with parent' do
+        Tweet.replies.should_not include(non_reply)
+      end
+    end  
+  end
 end
