@@ -43,5 +43,12 @@ RSpec.describe Tweet, type: :model do
       it { should belong_to :parent }
       it { should have_many :replies }
     end
+
+    context 'retweet-with-comment' do
+      let(:commentee) { described_class.create user: user, content: "Commentee", commenters: [subject] }
+      let(:commenters) { [ (described_class.create user: user, content: "Commenters", commentee: subject) ] }
+      it { should belong_to :commentee }
+      it { should have_many :commenters }
+    end
   end
 end
