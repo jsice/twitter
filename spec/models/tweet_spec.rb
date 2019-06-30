@@ -30,4 +30,11 @@ RSpec.describe Tweet, type: :model do
     end
 
   end
+
+  context 'associations' do
+    let(:user) { User.create name: "Name", email: "test@test.com", password: "password" }
+    subject { described_class.create user: user, content: "Content" }
+
+    it { should belong_to :user }
+  end
 end
