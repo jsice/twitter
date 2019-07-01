@@ -42,6 +42,17 @@ a.no-style, a.no-style:hover {
   z-index: -1;
 }
 
+.advance-form {
+  max-height: 0px;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+.advance-form.expanded {
+  max-height: 250px;
+  transition: max-height 0.5s ease-in;
+}
+
 @import "will_paginate_infinite";
 @import "bootstrap";
 @import "font-awesome";
