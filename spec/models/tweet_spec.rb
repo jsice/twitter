@@ -135,7 +135,7 @@ RSpec.describe Tweet, type: :model do
       it 'includes only published and undeleted tweets' do
         # expect(Tweet.present).to include(unset)
         expect(Tweet.present).to include(published)
-        expect(Tweet.present).to include(undeleted)
+        # expect(Tweet.present).to include(undeleted)
         expect(Tweet.present).to include(published_but_undeleted)
       end
 
