@@ -1,5 +1,7 @@
 class HashtagsController < ApplicationController
   layout 'main_with_sidebar'
+
+  skip_before_action :authenticate_user!, only: [:show]
   
   def show
     @hashtag = params[:hashtag]

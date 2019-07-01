@@ -1,5 +1,5 @@
 <% content.split(" ").each do |word| %>
-  <% if word.match? "/(?:\s|^)(?:#(?!(?:\d+|\w+?_|_\w+?)(?:\s|$)))(\w+)(?=\s|$)/i" %>
+  <% if word.match? /(?:\s|^)(?:#(?!(?:\d+|\w+?_|_\w+?)(?:\s|$)))(\w+)(?=\s|$)/i %>
     <%= link_to word, hashtag_path(word[1...]) %>
   <% else %>
     <%= word %>
