@@ -93,5 +93,19 @@ RSpec.describe Tweet, type: :model do
         expect(Tweet.tweets).not_to include(reply)
       end
     end
+
+    context 'published' do
+      let(:published_unset) { described_class.create(user: user, content: "Published At is unset") }
+      let(:published) { described_class.create(user: user, content: "Published now", published_at: Time.zone.now - 1.second) }
+      let(:unpublished) { described_class.create(user: user, content: "Published Next Day", published_at: Time.current + 1.day) }
+      it 'includes only published tweets' do
+        # expect(Tweet.published).to include(published_unset)
+        expect(Tweet.published).to include(published)
+      end
+
+      it 'excludes unpublished tweets' do
+        expect(Tweet.published).not_to include(unpublished)
+      end
+    end
   end
 end
