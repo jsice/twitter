@@ -148,4 +148,21 @@ RSpec.describe Tweet, type: :model do
       end
     end
   end
+
+  context 'search' do
+    let(:user) { User.create name: "Name", email: "test@test.com", password: "password" }
+    let(:everything) { described_class.create(user: user, content: "Everything") }
+    let(:anything) { described_class.create(user: user, content: "Anything") }
+    let(:nothing) { described_class.create(user: user, content: "Nothing") }
+    let(:all) { described_class.create(user: user, content: "All") }
+    it 'should include only tweets with "thing" in its content' do
+      expect(Tweet.search "thing").to include(everything)
+      expect(Tweet.search "thing").to include(anything)
+      expect(Tweet.search "thing").to include(nothing)
+    end
+
+    it 'should exclude tweets without "thing" in its content' do
+      expect(Tweet.search "thing").not_to include(all)
+    end
+  end
 end
