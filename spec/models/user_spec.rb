@@ -34,4 +34,28 @@ RSpec.describe User, type: :model do
     end
 
   end
+
+  context 'associations' do
+    subject { User.create name: "Name", email: "test@test.com", password: "password" }
+    let(:tweets) { [(Tweet.create user: subject, content: "Content")] }
+
+    it { should have_many :tweets }
+
+    context 'followers' do
+      let(:followings) { described_class.User.create name: "Name2", email: "test2@test.com", password: "password", followers: [subject] }
+      let(:followers) { [ (described_class.User.create name: "Name3", email: "test3@test.com", password: "password", followings: [subject]) ] }
+      it { should have_many :followings }
+      it { should have_many :followers }
+    end
+
+    context 'retweets' do
+      let(:retweets) { [ (Tweet.create user: subject, content: "Content", retweeters: [subject]) ] }
+      it { should have_many :retweets }
+    end
+
+    context 'likes' do
+      let(:liked_tweets) { [(Tweet.create user: subject, content: "Content", liking_users: [subject])] }
+      it { should have_many :liked_tweets }
+    end
+  end
 end
