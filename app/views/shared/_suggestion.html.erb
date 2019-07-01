@@ -1,10 +1,15 @@
-<% if @suggestions %>
+<% if suggestions %>
   <div>
     <h1>Who to Follow</h1>
-    <div class="list-group">
-      <% suggestions.each_with_index do |suggestion, index| %>
-        <%= link_to "#{index+1}. @#{suggestion.name}", user_path(suggestion), class: "list-group-item list-group-item-action" %>
-      <% end %>
-    </div>
+    <% if suggestions.empty? %>
+      No suggestion. <br />
+      Try tweet with some hashtags!
+    <% else %>
+      <div class="list-group">
+        <% suggestions.each_with_index do |suggestion, index| %>
+          <%= link_to "#{index+1}. @#{suggestion.name}", user_path(suggestion), class: "list-group-item list-group-item-action" %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 <% end %>
