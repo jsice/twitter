@@ -1,4 +1,5 @@
 class TweetsController < ApplicationController
+  layout 'main_with_sidebar'
 
   skip_before_action :authenticate_user!, only: [:index, :show]
 
