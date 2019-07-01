@@ -121,5 +121,31 @@ RSpec.describe Tweet, type: :model do
         expect(Tweet.not_deleted).not_to include(deleted)
       end
     end
+
+    context 'present' do
+      let(:unset) { described_class.create(user: user, content: "Everything is unset") }
+      let(:published) { described_class.create(user: user, content: "Published", published_at: Time.zone.now - 1.second) }
+      let(:unpublished) { described_class.create(user: user, content: "Unpublished", published_at: Time.zone.now + 1.day) }
+      let(:deleted) { described_class.create(user: user, content: "Deleted", deleted_at: Time.zone.now - 1.second) }
+      let(:undeleted) { described_class.create(user: user, content: "Undeleted", deleted_at: Time.zone.now + 1.day) }
+      let(:published_but_deleted) { described_class.create(user: user, content: "Published but deleted", published_at: Time.zone.now - 1.second, deleted_at: Time.zone.now - 1.second) }
+      let(:published_but_undeleted) { described_class.create(user: user, content: "Published but undeleted", published_at: Time.zone.now - 1.second, deleted_at: Time.zone.now + 1.day) }
+      let(:unpublished_but_deleted) { described_class.create(user: user, content: "Unpublished but deleted", published_at: Time.zone.now + 1.day, deleted_at: Time.zone.now - 1.second) }
+      let(:unpublished_but_undeleted) { described_class.create(user: user, content: "Unpublished and undeleted", published_at: Time.zone.now + 1.day, deleted_at: Time.zone.now + 1.day) }
+      it 'includes only published and undeleted tweets' do
+        # expect(Tweet.present).to include(unset)
+        expect(Tweet.present).to include(published)
+        expect(Tweet.present).to include(undeleted)
+        expect(Tweet.present).to include(published_but_undeleted)
+      end
+
+      it 'excludes deleted or unpublished tweets' do
+        expect(Tweet.present).not_to include(unpublished)
+        expect(Tweet.present).not_to include(deleted)
+        expect(Tweet.present).not_to include(published_but_deleted)
+        expect(Tweet.present).not_to include(unpublished_but_deleted)
+        expect(Tweet.present).not_to include(unpublished_but_undeleted)
+      end
+    end
   end
 end
