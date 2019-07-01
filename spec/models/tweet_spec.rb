@@ -107,5 +107,19 @@ RSpec.describe Tweet, type: :model do
         expect(Tweet.published).not_to include(unpublished)
       end
     end
+
+    context 'not_deleted' do
+      let(:deleted_unset) { described_class.create(user: user, content: "Deleted At is unset") }
+      let(:deleted) { described_class.create(user: user, content: "Deleted now", deleted_at: Time.zone.now - 1.second) }
+      let(:undeleted) { described_class.create(user: user, content: "Deleted Next Day", deleted_at: Time.current + 1.day) }
+      it 'includes only undeleted tweets' do
+        expect(Tweet.not_deleted).to include(deleted_unset)
+        expect(Tweet.not_deleted).to include(undeleted)
+      end
+
+      it 'excludes deleted tweets' do
+        expect(Tweet.not_deleted).not_to include(deleted)
+      end
+    end
   end
 end
