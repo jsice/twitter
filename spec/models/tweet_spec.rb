@@ -74,11 +74,11 @@ RSpec.describe Tweet, type: :model do
       let(:reply) { described_class.create user: user, content: "Reply", parent: subject }
       let(:non_reply) { described_class.create user: user, content: "Non Reply" }
       it 'includes only replies' do
-        Tweet.replies.should include(reply)
+        expect(Tweet.replies).to include(reply)
       end
 
       it 'excludes general tweets' do
-        Tweet.replies.should_not include(non_reply)
+        expect(Tweet.replies).not_to include(non_reply)
       end
     end
 
@@ -86,12 +86,12 @@ RSpec.describe Tweet, type: :model do
       let(:reply) { described_class.create user: user, content: "Reply", parent: subject }
       let(:non_reply) { described_class.create user: user, content: "Non Reply" }
       it 'includes only general tweets (not a reply)' do
-        Tweet.tweets.should include(non_reply)
+        expect(Tweet.tweets).to include(non_reply)
       end
 
       it 'excludes replies' do
-        Tweet.tweets.should_not include(reply)
+        expect(Tweet.tweets).not_to include(reply)
       end
-    end  
+    end
   end
 end
