@@ -19,7 +19,7 @@
 //= require will_paginate_infinite
 //= require_tree .
 
-$(document).ready(function() {
+$(document).on('turbolinks:load', function() {
   $('.advance-form-btn').on('click', function() {
     const isExpanded = $('.advance-form').hasClass('expanded')
     if (isExpanded) {
@@ -34,5 +34,13 @@ $(document).ready(function() {
       $('.advance-form-icon').removeClass('fa-angle-double-down')
       $('.advance-form-icon').addClass('fa-angle-double-up')
     }
+  })
+
+  $('.tab-link').on('click', function() {
+    const name = this.dataset.tabname
+    $('.tab-link.active').removeClass('active')
+    $(this).addClass('active')
+    $(`.tab-contents .active`).removeClass('active')
+    $(`.tab-contents #tab-${name}`).addClass('active')
   })
 })

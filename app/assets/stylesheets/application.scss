@@ -53,6 +53,34 @@ a.no-style, a.no-style:hover {
   transition: max-height 0.5s ease-in;
 }
 
+.tab-links {
+  display: flex;
+}
+
+.tab-link {
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.tab-link:not(:first-child) {
+  border-left: 1px solid lightgray;
+}
+
+.tab-link.active {
+  text-decoration: underline;
+}
+
+.tab-content {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+
+.tab-content.active {
+  opacity: 1;
+  display: block;
+}
+
 @import "will_paginate_infinite";
 @import "bootstrap";
 @import "font-awesome";

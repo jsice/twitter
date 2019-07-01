@@ -1,0 +1,10 @@
+<%= content_tag :div, class: "#{name} mt-3" do %>
+  <% if users.empty? %>
+    <%= message %>
+  <% else %>
+    <% users.each do |user| %>
+      <%= render 'users/user', user: user %>
+    <% end %>
+  <% end %>
+<% end %>
+<%= will_paginate users, renderer: WillPaginateInfinite::InfinitePagination %>

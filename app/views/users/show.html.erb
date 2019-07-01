@@ -14,4 +14,25 @@
     <% end %>
   </h1>
 </div>
-<%= render 'tweets/tweets', tweets: @tweets %>
+<nav class="tab-links">
+  <div class="tab-link active" data-tabname="tweets">
+    Tweets (<%= @tweets_size %>)
+  </div>
+  <div class="tab-link" data-tabname="followers">
+    Followers (<%= @followers_size %>)
+  </div>
+  <div class="tab-link" data-tabname="followings">
+    Followings (<%= @followings_size %>)
+  </div>
+</nav>
+<div class="tab-contents">
+  <div id="tab-tweets" class="tab-content active">
+    <%= render 'tweets/tweets', tweets: @tweets %>
+  </div>
+  <div id="tab-followers" class="tab-content">
+    <%= render 'users/users', users: @followers, name: "followers", message: "You have no followers" %>
+  </div>
+  <div id="tab-followings" class="tab-content">
+    <%= render 'users/users', users: @followings, name: "followings", message: "You have no followings" %>
+  </div>
+</div>
