@@ -1,1 +1,3 @@
 <%= render 'tweets/tweets', tweets: @tweets, formats: [:js] %>
+<%= render 'users/users', users: @followers, name: "followers", formats: [:js] %>
+<%= render 'users/users', users: @followings, name: "followings", formats: [:js] %>
