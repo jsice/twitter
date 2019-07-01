@@ -17,6 +17,6 @@ class ApplicationController < ActionController::Base
   end
 
   def show_suggestions
-    @suggestions = (current_user && current_user.related_users[0..5])
+    @suggestions = (current_user && (current_user.related_users - current_user.followings).first(10))
   end
 end
