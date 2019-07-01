@@ -1,22 +1,23 @@
 <nav class="navbar navbar-light bg-light mb-4 shadow-sm">
-  <%= link_to "Twitter", tweets_path, class: "navbar-brand" %>
-  <div class="text-center">
-    <%= form_tag tweets_path, enforce_utf8: false, method: :get do %>
-      <div class="input-group">
-        <%= text_field_tag :search, params[:search], placeholder: "Search...", class: "form-control" %>
-        <div class="input-group-append">
-          <span class="input-group-text text-white pointer">
-            <%= label_tag :search, class: "mb-0", for: :search_submit do %>
-              <%= fa_icon 'search' %>
-            <% end %>
-          </span>
-        </div>
-      </div>
-      <%= submit_tag "search", hidden: true, id: :search_submit, name: nil %>
-    <% end %>
+  <div class="col-2">
+    <%= link_to "Twitter", tweets_path, class: "navbar-brand" %>
   </div>
-  <div class="text-right">
+  <%= form_tag tweets_path, enforce_utf8: false, method: :get, class: "form-inlineblock col-5" do %>
+    <div class="input-group">
+      <%= text_field_tag :search, params[:search], placeholder: "Search...", class: "form-control" %>
+      <div class="input-group-append">
+        <span class="input-group-text text-white pointer">
+          <%= label_tag :search, class: "mb-0", for: :search_submit do %>
+            <%= fa_icon 'search' %>
+          <% end %>
+        </span>
+      </div>
+    </div>
+    <%= submit_tag "search", hidden: true, id: :search_submit, name: nil %>
+  <% end %>
+  <div class="col-5 text-right">
     <% if user_signed_in? %>
+      <%= "Welcome, @#{current_user.name} " %>
       <%= link_to 'Edit user', edit_user_registration_path, class: "btn btn-outline-secondary"  %>
       <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "btn btn-danger"  %>
     <% else %>
