@@ -18,3 +18,21 @@
 //= require bootstrap
 //= require will_paginate_infinite
 //= require_tree .
+
+$(document).ready(function() {
+  $('.advance-form-btn').on('click', function() {
+    const isExpanded = $('.advance-form').hasClass('expanded')
+    if (isExpanded) {
+      $('.advance-form').removeClass('expanded')
+      $('.advance-form-icon').removeClass('fa-angle-double-up')
+      $('.advance-form-icon').addClass('fa-angle-double-down')
+      $('.advance-form input').each(function(index, input) {
+        input.value = null
+      })
+    } else {
+      $('.advance-form').addClass('expanded')
+      $('.advance-form-icon').removeClass('fa-angle-double-down')
+      $('.advance-form-icon').addClass('fa-angle-double-up')
+    }
+  })
+})
