@@ -26,7 +26,14 @@ class User < ApplicationRecord
     (tweets.tweets + retweets).uniq.sort_by { |tweet| tweet.published_at } .reverse
   end
 
-  def related_users
-    tweets.map(&:find_related_hashtags).flatten.map(&:user).uniq - [self]
+  def related_users (n=3)
+    my_tags = get_hashtags_from(tweets)
+    User.where.not(id: id).sort_by { |u| (my_tags - get_hashtags_from(u.tweets)).length } [0...n]
+  end
+
+  private
+
+  def get_hashtags_from(tweets)
+    tweets.tag_counts_on(:hashtags).pluck(:id)
   end
 end
