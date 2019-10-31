@@ -5,7 +5,7 @@ ruby '2.6.1'
 
 gem 'bootstrap', '~> 4.3.1'
 gem "font-awesome-rails", '~> 4.7.0'
-gem 'devise', '~> 4.6.2'
+gem 'devise', '~> 4.7.1'
 gem 'acts-as-taggable-on', '~> 6.0'
 gem 'jquery-rails'
 gem 'will_paginate'
